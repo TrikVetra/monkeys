@@ -5,12 +5,12 @@ import type { RootState } from './Store'
 interface TextState {
   loadedText: string,
   userText: string,
-  identicText: string
+  identicText: String
 }
 
 // Define the initial state using that type
 const initialState: TextState = {
-  loadedText: '',
+  loadedText: 'qwerty',
   userText: '',
   identicText: ''
 }
@@ -26,9 +26,25 @@ export const counterSlice = createSlice({
     },
     changeUserText: (state, action: PayloadAction<string>) => {
       state.userText = action.payload
+      
+      let counter = 0
+      let pointer = state.userText.length
+      console.log(pointer)
+      console.log(action.payload)
+      console.log(action.payload[action.payload.length-1])
+      console.log(state.loadedText[pointer-1])
+      console.log(state.loadedText.length)
+      if(pointer <= state.loadedText.length) {
+        if (state.loadedText[pointer-1] === action.payload[action.payload.length-1]){
+          state.identicText += action.payload[pointer-1]
+        } else state.identicText += "."
+      } 
     }
   }
 })
+
+
+
 
 export const { changeLoadedText, changeUserText } = counterSlice.actions
 

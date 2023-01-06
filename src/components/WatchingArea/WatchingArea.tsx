@@ -12,7 +12,8 @@ const WatchingArea = () => {
                 style={{height: "50vh", backgroundColor: "#D3D3D3"}}
                 as="textarea" 
                 aria-label="With textarea" 
-                value={identicText} 
+                value={String(identicText)} 
+                readOnly
             />
         </>
     )
