@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 //import { useSelector, useDispatch } from 'react-redux'
-import { changeValue } from '../../store/LoadedTextSlice'
+import { changeLoadedText } from '../../store/TextSlice'
 import { useAppSelector, useAppDispatch } from '../../store/Hooks'
 
 const LoadText = () => {
@@ -15,12 +15,16 @@ const LoadText = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const text = useAppSelector(state => state.LoadedText.value)
+    const text = useAppSelector(state => state.Text.loadedText)
     const dispatch = useAppDispatch()
 
     return (
         <>
-            <Button variant="dark" type="submit" onClick={handleShow}>
+            <Button 
+            style={{"margin": "0px 0px 20px 10px"}}
+            variant="dark" 
+            type="submit" 
+            onClick={handleShow}>
                 Загрузить текст
             </Button>
 
@@ -32,24 +36,22 @@ const LoadText = () => {
 
                     <Form.Control 
                     as="textarea" 
-                    aria-label="With textarea" 
+                    aria-label="Text" 
                     value={text} 
-                    onChange={(e) => dispatch(changeValue(e.target.value))}
+                    onChange={(e) => dispatch(changeLoadedText(e.target.value))}
                     />
 
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="outline-dark" onClick={handleClose}>
+                {/* <Button variant="outline-dark" onClick={handleClose}>
                     Закрыть
-                </Button>
+                </Button> */}
                 <Button variant="dark" onClick={handleClose}>
                     Готово
                 </Button>
                 </Modal.Footer>
             </Modal>
         </>
-            
-        
     )
 }
 

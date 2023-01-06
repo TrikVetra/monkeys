@@ -25,7 +25,7 @@ const Intro = () => {
                 Давайте проверим.
                 </p>
                 </Col>                
-            </Row>            
+            </Row>           
         </Container>
     )
 }

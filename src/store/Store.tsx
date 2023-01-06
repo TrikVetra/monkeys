@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import loadedTextReducer from './LoadedTextSlice'
+import TextReducer from './TextSlice'
 
 export const store = configureStore({
   reducer: {
-    LoadedText: loadedTextReducer
+    Text: TextReducer
   }
 })
 
