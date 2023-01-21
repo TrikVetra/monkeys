@@ -12,7 +12,7 @@ interface TextState {
 
 // Define the initial state using that type
 const initialState: TextState = {
-  loadedText: 'qwerty',
+  loadedText: '',
   userText: '',
   identicText: '',
   counter: 0,
@@ -29,10 +29,12 @@ export const counterSlice = createSlice({
       state.loadedText = action.payload
     },
     changeUserText: (state, action: PayloadAction<string>) => {
-
-      
-
       state.userText = action.payload
+      if (state.loadedText.length === 0) {
+        alert("текст не загружен")
+        state.userText = ""
+        state.identicText = ""
+      } 
 
       //let counter
       if (state.userText.length > state.loadedText.length) {

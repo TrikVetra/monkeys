@@ -1,5 +1,3 @@
-import { Container } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
 import { useAppSelector } from '../../store/Hooks'
 import style from './Counter.module.css'
 

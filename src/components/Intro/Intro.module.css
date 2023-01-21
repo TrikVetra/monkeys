@@ -1,0 +1,7 @@
+@media (max-width: 425px) {
+    .title{
+        font-size:xx-large;
+        max-width: 75%;
+        padding: 10px;
+    }
+}

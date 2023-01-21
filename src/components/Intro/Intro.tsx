@@ -1,13 +1,14 @@
 import { Container } from "react-bootstrap"
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import style from './Intro.module.css'
 
 const Intro = () => {
     return (
         <Container fluid="md">
             <Row >
-                <Col sm={10}>
-                <h1>Может ли обезьяна написать<br></br> Войну и Мир? </h1>
+                <Col sm={9}>
+                <h1 className={style.title}>Может ли обезьяна написать Войну и Мир? </h1>
                 </Col>
             </Row>
             <Row >
