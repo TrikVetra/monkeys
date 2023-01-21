@@ -5,14 +5,18 @@ import type { RootState } from './Store'
 interface TextState {
   loadedText: string,
   userText: string,
-  identicText: string
+  identicText: string,
+  counter: number,
+  pointer: number
 }
 
 // Define the initial state using that type
 const initialState: TextState = {
   loadedText: 'qwerty',
   userText: '',
-  identicText: ''
+  identicText: '',
+  counter: 0,
+  pointer: 0
 }
 
 export const counterSlice = createSlice({
@@ -30,37 +34,37 @@ export const counterSlice = createSlice({
 
       state.userText = action.payload
 
-      let counter
+      //let counter
       if (state.userText.length > state.loadedText.length) {
-        counter = Math.floor((state.userText.length - 1) / state.loadedText.length)
+        state.counter = Math.floor((state.userText.length - 1) / state.loadedText.length)
       } else {
-        counter = 0
+        state.counter = 0
       }
 
-      let pointer = state.userText.length - state.loadedText.length * counter - 1
+      state.pointer = state.userText.length - state.loadedText.length * state.counter - 1
 
-      console.log(pointer + 1)
+      console.log(state.pointer + 1)
       console.log("action.payload: " + action.payload)
       console.log("last letter: " + action.payload[action.payload.length - 1])
-      console.log("letter place: " + state.loadedText[pointer])
+      console.log("letter place: " + state.loadedText[state.pointer])
       console.log("loaded text length: " + state.loadedText.length)
-      console.log("counter: " + counter)
+      console.log("counter: " + state.counter)
       console.log("----------------------------------------------------")
 
       const replaceAt = (str: string, index: number, replacement: string) => {
         return str.substring(0, index) + replacement + str.substring(index + replacement.length);
       }
       
-      if (counter === 0) {
-        if (state.loadedText[pointer] === action.payload[action.payload.length - 1]) {
-          state.identicText += action.payload[pointer]
+      if (state.counter === 0) {
+        if (state.loadedText[state.pointer] === action.payload[action.payload.length - 1]) {
+          state.identicText += action.payload[state.pointer]
         } else state.identicText += "."
       } else {
         if (
-          state.identicText[pointer] === "."
-          && state.loadedText[pointer] === action.payload[action.payload.length - 1]
+          state.identicText[state.pointer] === "."
+          && state.loadedText[state.pointer] === action.payload[action.payload.length - 1]
         ) {
-          state.identicText = replaceAt(state.identicText, pointer, state.loadedText[pointer])
+          state.identicText = replaceAt(state.identicText, state.pointer, state.loadedText[state.pointer])
         }
       }
 
