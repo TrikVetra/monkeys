@@ -8,13 +8,15 @@ import WatchingArea from './components/WatchingArea/WatchingArea';
 import WritingArea from './components/WritingArea/WritingArea';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Counter from './components/Counter/Counter';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <Intro/>
+      <Counter/>
+      <Intro/>      
       <LoadText/>
       <Row>
         <Col>          
