@@ -26,19 +26,34 @@ export const counterSlice = createSlice({
     },
     changeUserText: (state, action: PayloadAction<string>) => {
       state.userText = action.payload
-      
-      let counter = 0
-      let pointer = state.userText.length
-      console.log(pointer)
-      console.log(action.payload)
-      console.log(action.payload[action.payload.length-1])
-      console.log(state.loadedText[pointer-1])
-      console.log(state.loadedText.length)
-      if(pointer <= state.loadedText.length) {
+
+      let counter
+      if(state.userText.length > state.loadedText.length) {
+        counter = Math.floor((state.userText.length-1)/state.loadedText.length)
+      } else {
+        counter = 0
+      }
+
+      let pointer = state.userText.length - state.loadedText.length * counter
+
+      console.log("pointer: " + pointer)
+      console.log("action.payload: " + action.payload)
+      console.log("last letter: " + action.payload[action.payload.length-1])
+      console.log("letter place: " + state.loadedText[pointer-1])
+      console.log("loaded text length: " + state.loadedText.length)
+      console.log("counter: " + counter)
+      console.log("----------------------------------------------------")
+
+      if (counter === 0) {
         if (state.loadedText[pointer-1] === action.payload[action.payload.length-1]){
           state.identicText += action.payload[pointer-1]
         } else state.identicText += "."
-      } 
+      } else {
+        let printedText = state.identicText
+        
+      }
+      
+      
     }
   }
 })
