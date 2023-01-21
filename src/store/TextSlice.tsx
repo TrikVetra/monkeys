@@ -5,7 +5,7 @@ import type { RootState } from './Store'
 interface TextState {
   loadedText: string,
   userText: string,
-  identicText: String
+  identicText: string
 }
 
 // Define the initial state using that type
@@ -25,35 +25,46 @@ export const counterSlice = createSlice({
       state.loadedText = action.payload
     },
     changeUserText: (state, action: PayloadAction<string>) => {
+
+      
+
       state.userText = action.payload
 
       let counter
-      if(state.userText.length > state.loadedText.length) {
-        counter = Math.floor((state.userText.length-1)/state.loadedText.length)
+      if (state.userText.length > state.loadedText.length) {
+        counter = Math.floor((state.userText.length - 1) / state.loadedText.length)
       } else {
         counter = 0
       }
 
-      let pointer = state.userText.length - state.loadedText.length * counter
+      let pointer = state.userText.length - state.loadedText.length * counter - 1
 
-      console.log("pointer: " + pointer)
+      console.log(pointer + 1)
       console.log("action.payload: " + action.payload)
-      console.log("last letter: " + action.payload[action.payload.length-1])
-      console.log("letter place: " + state.loadedText[pointer-1])
+      console.log("last letter: " + action.payload[action.payload.length - 1])
+      console.log("letter place: " + state.loadedText[pointer])
       console.log("loaded text length: " + state.loadedText.length)
       console.log("counter: " + counter)
       console.log("----------------------------------------------------")
 
-      if (counter === 0) {
-        if (state.loadedText[pointer-1] === action.payload[action.payload.length-1]){
-          state.identicText += action.payload[pointer-1]
-        } else state.identicText += "."
-      } else {
-        let printedText = state.identicText
-        
+      const replaceAt = (str: string, index: number, replacement: string) => {
+        return str.substring(0, index) + replacement + str.substring(index + replacement.length);
       }
       
-      
+      if (counter === 0) {
+        if (state.loadedText[pointer] === action.payload[action.payload.length - 1]) {
+          state.identicText += action.payload[pointer]
+        } else state.identicText += "."
+      } else {
+        if (
+          state.identicText[pointer] === "."
+          && state.loadedText[pointer] === action.payload[action.payload.length - 1]
+        ) {
+          state.identicText = replaceAt(state.identicText, pointer, state.loadedText[pointer])
+        }
+      }
+
+
     }
   }
 })
