@@ -27,6 +27,10 @@ export const counterSlice = createSlice({
     // Use the PayloadAction type to declare the contents of `action.payload`
     changeLoadedText: (state, action: PayloadAction<string>) => {
       state.loadedText = action.payload
+      state.userText = '',
+      state.identicText = '',
+      state.counter = 0,
+      state.pointer = 0
     },
     changeUserText: (state, action: PayloadAction<string>) => {
       state.userText = action.payload
