@@ -28,7 +28,9 @@ export const counterSlice = createSlice({
     changeLoadedText: (state, action: PayloadAction<string>) => {
       state.loadedText = action.payload
       state.userText = '',
-      state.identicText = '',
+
+      state.identicText = '.'.repeat(state.loadedText.length),
+
       state.counter = 0,
       state.pointer = 0
     },
@@ -39,8 +41,6 @@ export const counterSlice = createSlice({
         state.userText = ""
         state.identicText = ""
       }
-
-      //let counter
       if (state.userText.length > state.loadedText.length) {
         state.counter = Math.floor((state.userText.length - 1) / state.loadedText.length)
       } else {
@@ -62,20 +62,12 @@ export const counterSlice = createSlice({
       }
       let a = state.loadedText[state.pointer].toLowerCase()
       let b = action.payload[action.payload.length - 1].toLowerCase()
-      if (state.counter === 0) {
-        if (a === b) {
-          state.identicText += state.loadedText[state.pointer]
-        } else state.identicText += "."
-      } else {
         if (
           state.identicText[state.pointer] === "."
           && a === b
         ) {
           state.identicText = replaceAt(state.identicText, state.pointer, state.loadedText[state.pointer])
         }
-      }
-
-
     }
   }
 })
