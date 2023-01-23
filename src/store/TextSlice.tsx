@@ -34,7 +34,7 @@ export const counterSlice = createSlice({
         alert("текст не загружен")
         state.userText = ""
         state.identicText = ""
-      } 
+      }
 
       //let counter
       if (state.userText.length > state.loadedText.length) {
@@ -56,15 +56,16 @@ export const counterSlice = createSlice({
       const replaceAt = (str: string, index: number, replacement: string) => {
         return str.substring(0, index) + replacement + str.substring(index + replacement.length);
       }
-      
+      let a = state.loadedText[state.pointer].toLowerCase()
+      let b = action.payload[action.payload.length - 1].toLowerCase()
       if (state.counter === 0) {
-        if (state.loadedText[state.pointer] === action.payload[action.payload.length - 1]) {
-          state.identicText += action.payload[state.pointer]
+        if (a === b) {
+          state.identicText += state.loadedText[state.pointer]
         } else state.identicText += "."
       } else {
         if (
           state.identicText[state.pointer] === "."
-          && state.loadedText[state.pointer] === action.payload[action.payload.length - 1]
+          && a === b
         ) {
           state.identicText = replaceAt(state.identicText, state.pointer, state.loadedText[state.pointer])
         }
