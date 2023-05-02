@@ -37,7 +37,7 @@ export const counterSlice = createSlice({
     changeUserText: (state, action: PayloadAction<string>) => {
       state.userText = action.payload
       if (state.loadedText.length === 0) {
-        alert("текст не загружен")
+        alert("Текст не загружен. Прежде чем начать, нажми «Загрузить текст» и напиши там что-нибудь.")
         state.userText = ""
         state.identicText = ""
       }
@@ -71,9 +71,6 @@ export const counterSlice = createSlice({
     }
   }
 })
-
-
-
 
 export const { changeLoadedText, changeUserText } = counterSlice.actions
 

@@ -9,6 +9,7 @@ import WritingArea from './components/WritingArea/WritingArea';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Counter from './components/Counter/Counter';
+import Laziness from './components/Laziness/Laziness';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
       <Counter/>
       <Intro/>      
       <LoadText/>
+      <Laziness/>
       <Row>
         <Col>          
           <WritingArea/>
@@ -28,7 +30,6 @@ function App() {
         
       </Row>
       
-      {/*<Counter/> */}
     </div>
   )
 }

@@ -8,8 +8,6 @@ import { useAppSelector, useAppDispatch } from '../../store/Hooks'
 
 const LoadText = () => {
 
-    //let text = "test"
-
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
