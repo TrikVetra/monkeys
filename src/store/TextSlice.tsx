@@ -7,7 +7,8 @@ interface TextState {
   userText: string,
   identicText: string,
   counter: number,
-  pointer: number
+  pointer: number,
+  autotext: boolean
 }
 
 // Define the initial state using that type
@@ -16,7 +17,8 @@ const initialState: TextState = {
   userText: '',
   identicText: '',
   counter: 0,
-  pointer: 0
+  pointer: 0,
+  autotext: false,
 }
 
 export const counterSlice = createSlice({
@@ -25,6 +27,19 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
+    changeAutoText: (state, action: PayloadAction<boolean>) => {
+      state.autotext = action.payload
+      console.log('slice ' + state.autotext)
+      if (state.autotext) {
+        state.userText = state.userText + 'a'
+        //!!!!!!!!!!!!!Добавить сюда генератор букв по интервалу.
+
+        // setInterval(() => {
+        //   state.userText = state.userText + 'a'
+        // },100)
+      } 
+    },
+    
     changeLoadedText: (state, action: PayloadAction<string>) => {
       state.loadedText = action.payload
       state.userText = '',
@@ -35,7 +50,9 @@ export const counterSlice = createSlice({
       state.pointer = 0
     },
     changeUserText: (state, action: PayloadAction<string>) => {
+      
       state.userText = action.payload
+      
       if (state.loadedText.length === 0) {
         alert("Текст не загружен. Прежде чем начать, нажми «Загрузить текст» и напиши там что-нибудь.")
         state.userText = ""
@@ -49,13 +66,13 @@ export const counterSlice = createSlice({
 
       state.pointer = state.userText.length - state.loadedText.length * state.counter - 1
 
-      console.log(state.pointer + 1)
-      console.log("action.payload: " + action.payload)
-      console.log("last letter: " + action.payload[action.payload.length - 1])
-      console.log("letter place: " + state.loadedText[state.pointer])
-      console.log("loaded text length: " + state.loadedText.length)
-      console.log("counter: " + state.counter)
-      console.log("----------------------------------------------------")
+      // console.log(state.pointer + 1)
+      // console.log("action.payload: " + action.payload)
+      // console.log("last letter: " + action.payload[action.payload.length - 1])
+      // console.log("letter place: " + state.loadedText[state.pointer])
+      // console.log("loaded text length: " + state.loadedText.length)
+      // console.log("counter: " + state.counter)
+      // console.log("----------------------------------------------------")
 
       const replaceAt = (str: string, index: number, replacement: string) => {
         return str.substring(0, index) + replacement + str.substring(index + replacement.length);
@@ -72,7 +89,7 @@ export const counterSlice = createSlice({
   }
 })
 
-export const { changeLoadedText, changeUserText } = counterSlice.actions
+export const { changeLoadedText, changeUserText, changeAutoText } = counterSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 //export const changeText = (state: RootState) => state.Text.loadedText

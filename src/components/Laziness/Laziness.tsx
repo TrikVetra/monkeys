@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import { changeAutoText } from '../../store/TextSlice'
+import { useAppSelector, useAppDispatch } from '../../store/Hooks'
 
 const Laziness = () => {
 
-    const [autotext, setAutotext] = useState(false);
+    const autotext = useAppSelector(state => state.Text.autotext)
 
-    const handleWriting = () => setAutotext(!autotext)
+    const dispatch = useAppDispatch()
+
+    const handleWriting = () => {
+        dispatch(changeAutoText(!autotext))
+    }
 
     return (
         <>
