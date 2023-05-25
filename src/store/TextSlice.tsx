@@ -21,6 +21,10 @@ const initialState: TextState = {
   autotext: false,
 }
 
+function delay(ms:number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export const counterSlice = createSlice({
   name: 'Text',
   // `createSlice` will infer the state type from the `initialState` argument
@@ -30,14 +34,18 @@ export const counterSlice = createSlice({
     changeAutoText: (state, action: PayloadAction<boolean>) => {
       state.autotext = action.payload
       console.log('slice ' + state.autotext)
-      if (state.autotext) {
-        state.userText = state.userText + 'a'
-        //!!!!!!!!!!!!!Добавить сюда генератор букв по интервалу.
 
-        // setInterval(() => {
-        //   state.userText = state.userText + 'a'
-        // },100)
-      } 
+      while (state.autotext) {
+        delay(1000).then(() => {state.userText = state.userText + 'a'; console.log(state.userText)})
+      }
+
+      // if (state.autotext) {
+      //   //state.userText = state.userText + 'a'
+
+      //   setInterval(() => {
+      //     state.userText = state.userText + 'a'
+      //   },100)
+      // } 
     },
     
     changeLoadedText: (state, action: PayloadAction<string>) => {

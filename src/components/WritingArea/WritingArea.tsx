@@ -4,8 +4,10 @@ import { useAppSelector, useAppDispatch } from '../../store/Hooks'
 
 const WritingArea = () => {
 
-    const userText = useAppSelector(state => state.Text.userText)
     const dispatch = useAppDispatch()
+
+    const userText = useAppSelector(state => state.Text.userText)
+    const autotext = useAppSelector(state => state.Text.autotext)    
 
     return (
         <>
@@ -15,7 +17,7 @@ const WritingArea = () => {
                 as="textarea" 
                 aria-label="With textarea" 
                 value={userText} 
-                onChange={(e) => dispatch(changeUserText(e.target.value))}
+                onChange={(e) => dispatch(changeUserText(e.target.value)) }
             />
         </>
     )
