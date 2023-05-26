@@ -7,7 +7,7 @@ const WritingArea = () => {
     const dispatch = useAppDispatch()
 
     const userText = useAppSelector(state => state.Text.userText)
-    const autotext = useAppSelector(state => state.Text.autotext)    
+    //const autotext = useAppSelector(state => state.Text.autotext)    
 
     return (
         <>
