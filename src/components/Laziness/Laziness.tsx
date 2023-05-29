@@ -1,30 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
-import { changeUserText } from '../../store/TextSlice'
+import { changeAutoText } from '../../store/TextSlice'
 import { useAppSelector, useAppDispatch } from '../../store/Hooks'
-
-var intervalID: number
 
 const Laziness = () => {
     const dispatch = useAppDispatch()
 
-    const [autotext, setAutotext] = useState(false);    
-    const userText = useAppSelector(state => state.Text.userText)
+    const [autotext, setAutotext] = useState(false);  
+    //const [intervalID, setIntervalID] = useState(0);      
+    let intervalID = useRef(0)
 
-    function intervalDispatch (userText: string) {
-        intervalID = setInterval(() => dispatch(changeUserText(userText + 'a')), 500)        
+    function intervalDispatch () {
+        if (autotext) {
+            let intID = setInterval(() => {
+                let randomValue = String.fromCharCode(Math.floor(Math.random()*(1040-1071))+1071).toLocaleLowerCase()
+                dispatch(changeAutoText(randomValue))
+            }, 500)     
+            intervalID.current = intID
+        } else {
+            if (intervalID) clearInterval(intervalID.current)
+        }
     }
 
-    useEffect(() => {
-        if (autotext) {
-            intervalDispatch(userText)     
-        } else {
-            clearInterval(intervalID)
-        }      
-    }, [autotext]);
+    useEffect(() => { 
+            intervalDispatch ()
+    },[autotext]);
 
-    const handleWriting = () => {
-        setAutotext(!autotext)               
+    const handleWriting = () => {        
+        setAutotext(!autotext)         
     }
 
     return (
@@ -36,6 +39,11 @@ const Laziness = () => {
             onClick={handleWriting}>
                 {autotext ? 'Остановите обезьян!' : 'Лень писать, зовите обезьян!'}                
             </Button>
+            <br></br>
+            <h1>
+                Сделать автотекст хранящимся в сторе.
+                Если true += если false = 
+            </h1>
         </>
     )
 }

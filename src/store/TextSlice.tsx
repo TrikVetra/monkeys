@@ -31,21 +31,8 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    changeAutoText: (state, action: PayloadAction<boolean>) => {
-      state.autotext = action.payload
-      console.log('slice ' + state.autotext)
-
-      while (state.autotext) {
-        delay(1000).then(() => {state.userText = state.userText + 'a'; console.log(state.userText)})
-      }
-
-      // if (state.autotext) {
-      //   //state.userText = state.userText + 'a'
-
-      //   setInterval(() => {
-      //     state.userText = state.userText + 'a'
-      //   },100)
-      // } 
+    changeAutoText: (state, action: PayloadAction<string>) => {
+      state.userText += action.payload
     },
     
     changeLoadedText: (state, action: PayloadAction<string>) => {
@@ -61,11 +48,11 @@ export const counterSlice = createSlice({
       
       state.userText = action.payload
       
-      if (state.loadedText.length === 0) {
+      if (state.loadedText.length < 1) {
         alert("Текст не загружен. Прежде чем начать, нажми «Загрузить текст» и напиши там что-нибудь.")
         state.userText = ""
         state.identicText = ""
-      }
+      } 
       if (state.userText.length > state.loadedText.length) {
         state.counter = Math.floor((state.userText.length - 1) / state.loadedText.length)
       } else {
