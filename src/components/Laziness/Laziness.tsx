@@ -15,7 +15,7 @@ const Laziness = () => {
             let intID = setInterval(() => {
                 let randomValue = String.fromCharCode(Math.floor(Math.random()*(1040-1071))+1071).toLocaleLowerCase()
                 dispatch(changeUserText(randomValue))
-            }, 50)     
+            }, 20)     
             intervalID.current = intID
         } else {
             if (intervalID) clearInterval(intervalID.current)

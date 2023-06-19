@@ -1,11 +1,14 @@
 import Form from 'react-bootstrap/Form';
-import { useAppSelector } from '../../store/Hooks'
+import { useAppSelector, useAppDispatch } from '../../store/Hooks'
 import styles from "./WatchingArea.module.css"
 import { changeAutoText } from '../../store/TextSlice'
-
+import CustomAlert from '../../utils/CustomAlert/CustomAlert';
 
 
 const WatchingArea = () => {
+
+    const dispatch = useAppDispatch()
+
     let pointerCounter: number = -1
     const identicText = useAppSelector(state => state.Text.identicText)
     const loadedText = useAppSelector(state => state.Text.loadedText)
@@ -14,14 +17,9 @@ const WatchingArea = () => {
         pointerCounter++
         return { place: pointerCounter, element: el }
     })
-
+    
+    const autotext = useAppSelector(state => state.Text.autotext)
     const pointer = useAppSelector(state => state.Text.pointer)
-
-    function finish () {
-        alert ('Обезьяны написали!')
-    }
-
-    if (loadedText !== "" && identicText === loadedText) finish()
 
     return (
         <>
@@ -33,11 +31,15 @@ const WatchingArea = () => {
                             key={el.place}
                             className={el.place === pointer ? styles.pointer : ""}
                         >
-                            {el.element}
+                            {el.element}                            
                         </div>
+                        
                     )
                 })}
             </div>
+            {loadedText !== "" && identicText === loadedText
+            ? <CustomAlert title="Ура!" body="Обезьяны написали!" button="Закрыть" />
+            : null}
         </>
     )
 }
