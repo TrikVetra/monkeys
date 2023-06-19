@@ -1,17 +1,27 @@
 import Form from 'react-bootstrap/Form';
 import { useAppSelector } from '../../store/Hooks'
 import styles from "./WatchingArea.module.css"
+import { changeAutoText } from '../../store/TextSlice'
+
+
 
 const WatchingArea = () => {
-    let counter: number = -1
+    let pointerCounter: number = -1
     const identicText = useAppSelector(state => state.Text.identicText)
+    const loadedText = useAppSelector(state => state.Text.loadedText)
     const chars = [...identicText]
     const data = chars.map(el => {
-        counter++
-        return { place: counter, element: el }
+        pointerCounter++
+        return { place: pointerCounter, element: el }
     })
 
     const pointer = useAppSelector(state => state.Text.pointer)
+
+    function finish () {
+        alert ('Обезьяны написали!')
+    }
+
+    if (loadedText !== "" && identicText === loadedText) finish()
 
     return (
         <>

@@ -31,11 +31,11 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-    changeAutoText: (state, action: PayloadAction<string>) => {
-      state.userText += action.payload
+    changeAutoText: (state, action: PayloadAction<boolean>) => {
+      state.autotext = action.payload
     },
     
-    changeLoadedText: (state, action: PayloadAction<string>) => {
+    changeLoadedText: (state, action: PayloadAction<string>) => {      
       state.loadedText = action.payload
       state.userText = '',
 
@@ -45,8 +45,8 @@ export const counterSlice = createSlice({
       state.pointer = 0
     },
     changeUserText: (state, action: PayloadAction<string>) => {
-      
-      state.userText = action.payload
+      if (state.autotext) state.userText += action.payload  
+      else state.userText = action.payload
       
       if (state.loadedText.length < 1) {
         alert("Текст не загружен. Прежде чем начать, нажми «Загрузить текст» и напиши там что-нибудь.")
@@ -60,14 +60,6 @@ export const counterSlice = createSlice({
       }
 
       state.pointer = state.userText.length - state.loadedText.length * state.counter - 1
-
-      // console.log(state.pointer + 1)
-      // console.log("action.payload: " + action.payload)
-      // console.log("last letter: " + action.payload[action.payload.length - 1])
-      // console.log("letter place: " + state.loadedText[state.pointer])
-      // console.log("loaded text length: " + state.loadedText.length)
-      // console.log("counter: " + state.counter)
-      // console.log("----------------------------------------------------")
 
       const replaceAt = (str: string, index: number, replacement: string) => {
         return str.substring(0, index) + replacement + str.substring(index + replacement.length);

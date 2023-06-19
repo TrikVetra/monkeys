@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
-import { changeAutoText } from '../../store/TextSlice'
+import { changeAutoText, changeUserText } from '../../store/TextSlice'
 import { useAppSelector, useAppDispatch } from '../../store/Hooks'
 
 const Laziness = () => {
     const dispatch = useAppDispatch()
 
-    const [autotext, setAutotext] = useState(false);  
-    //const [intervalID, setIntervalID] = useState(0);      
+    const autotext = useAppSelector(state => state.Text.autotext)
+
     let intervalID = useRef(0)
 
     function intervalDispatch () {
         if (autotext) {
             let intID = setInterval(() => {
                 let randomValue = String.fromCharCode(Math.floor(Math.random()*(1040-1071))+1071).toLocaleLowerCase()
-                dispatch(changeAutoText(randomValue))
-            }, 500)     
+                dispatch(changeUserText(randomValue))
+            }, 50)     
             intervalID.current = intID
         } else {
             if (intervalID) clearInterval(intervalID.current)
@@ -26,8 +26,8 @@ const Laziness = () => {
             intervalDispatch ()
     },[autotext]);
 
-    const handleWriting = () => {        
-        setAutotext(!autotext)         
+    const handleWriting = () => {     
+        dispatch(changeAutoText(!autotext))    
     }
 
     return (
@@ -41,8 +41,7 @@ const Laziness = () => {
             </Button>
             <br></br>
             <h1>
-                Сделать автотекст хранящимся в сторе.
-                Если true += если false = 
+                {autotext}
             </h1>
         </>
     )
