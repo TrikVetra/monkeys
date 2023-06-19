@@ -4,9 +4,12 @@ import Modal from 'react-bootstrap/Modal';
 
 function CustomAlert(props: any) {
 
-  const [show, setShow] = useState(false);
+  //const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  // if (props.active) setShow(true)
+  // else setShow(false)
+
+  //const handleClose = () => props.onClose();
 
   return (
     <div
@@ -23,7 +26,7 @@ function CustomAlert(props: any) {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="dark" onClick={(handleClose)}>{props.button}</Button>          
+          <Button variant="dark" onClick={() => {props.onClose()}}>{props.button}</Button>          
         </Modal.Footer>
       </Modal.Dialog>
     </div>

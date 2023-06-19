@@ -58,7 +58,7 @@ const LoadText = () => {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    //const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const text = useAppSelector(state => state.Text.loadedText)
@@ -84,7 +84,8 @@ const LoadText = () => {
                             value={text}
                             onChange={(e) => dispatch(changeLoadedText(e.target.value))}
                         />}
-                    button="Готово" />
+                    button="Готово" 
+                    onClose={() => {setShow(false)}}/>
                 : null}
         </>
     )
