@@ -1,7 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import { useAppSelector, useAppDispatch } from '../../store/Hooks'
 import styles from "./WatchingArea.module.css"
-import { changeAutoText } from '../../store/TextSlice'
+import { finish } from '../../store/TextSlice'
 import CustomAlert from '../../utils/CustomAlert/CustomAlert';
 
 
@@ -18,18 +18,22 @@ const WatchingArea = () => {
         return { place: pointerCounter, element: el }
     })
     
-    const autotext = useAppSelector(state => state.Text.autotext)
     const pointer = useAppSelector(state => state.Text.pointer)
+    const counter = useAppSelector(state => state.Text.counter)
+
+    const isFinish = useAppSelector(state => state.Text.isFinish)
+    if (loadedText !== "" && loadedText === identicText) dispatch(finish(true))
 
     return (
         <>
             <h5>Если угадал с буквами, увидишь их тут</h5>
+
             <div className={styles.area}>
                 {data.map(el => {
                     return (
                         <div
                             key={el.place}
-                            className={el.place === pointer ? styles.pointer : ""}
+                            className={el.place === pointer ? styles.pointer : styles.holder}
                         >
                             {el.element}                            
                         </div>
@@ -37,8 +41,18 @@ const WatchingArea = () => {
                     )
                 })}
             </div>
-            {loadedText !== "" && identicText === loadedText
-            ? <CustomAlert title="Ура!" body="Обезьяны написали!" button="Закрыть" />
+
+            {isFinish
+            ? <CustomAlert 
+                title="Ура!" 
+                body = {
+                    <>
+                    <div>Обезьяны написали!</div>
+                    <div>Понадобилось <span className={styles.pointer}>{counter}</span> обезьян.</div>
+                    </>
+                }
+                button="Начать заново" 
+                onClose={() => {dispatch(finish(false))}}/>
             : null}
         </>
     )

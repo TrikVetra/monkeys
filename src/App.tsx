@@ -20,6 +20,7 @@ function App() {
       <Intro/>      
       <LoadText/>
       <Laziness/>
+      <h2>Опубликовать проект на Pages</h2>
       <Row>
         <Col>          
           <WritingArea/>

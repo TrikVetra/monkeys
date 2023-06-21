@@ -4,20 +4,13 @@ import Modal from 'react-bootstrap/Modal';
 
 function CustomAlert(props: any) {
 
-  //const [show, setShow] = useState(false);
-
-  // if (props.active) setShow(true)
-  // else setShow(false)
-
-  //const handleClose = () => props.onClose();
-
   return (
     <div
       className="modal show"
       style={{ display: 'block', position: 'absolute' }}
     >
       <Modal.Dialog>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
 

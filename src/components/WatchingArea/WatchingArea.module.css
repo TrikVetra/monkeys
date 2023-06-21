@@ -11,4 +11,9 @@
     background-color: black;
     color: white;
     height: max-content;
+    min-width: 5px;
+}
+
+.holder{
+    min-width: 5px;
 }

@@ -8,7 +8,8 @@ interface TextState {
   identicText: string,
   counter: number,
   pointer: number,
-  autotext: boolean
+  autotext: boolean,
+  isFinish: boolean
 }
 
 // Define the initial state using that type
@@ -19,6 +20,7 @@ const initialState: TextState = {
   counter: 0,
   pointer: 0,
   autotext: false,
+  isFinish: false
 }
 
 function delay(ms:number) {
@@ -48,11 +50,6 @@ export const counterSlice = createSlice({
       if (state.autotext) state.userText += action.payload  
       else state.userText = action.payload
       
-      if (state.loadedText.length < 1) {
-        alert("Текст не загружен. Прежде чем начать, нажми «Загрузить текст» и напиши там что-нибудь.")
-        state.userText = ""
-        state.identicText = ""
-      } 
       if (state.userText.length > state.loadedText.length) {
         state.counter = Math.floor((state.userText.length - 1) / state.loadedText.length)
       } else {
@@ -61,22 +58,32 @@ export const counterSlice = createSlice({
 
       state.pointer = state.userText.length - state.loadedText.length * state.counter - 1
 
-      const replaceAt = (str: string, index: number, replacement: string) => {
-        return str.substring(0, index) + replacement + str.substring(index + replacement.length);
+      const replaceAt = (str: string, index: number, replacement: string) => {        
+        console.log(str.substring(0, index) + replacement + str.substring(index + 1))
+        return str.substring(0, index) + replacement + str.substring(index + 1);        
       }
       let a = state.loadedText[state.pointer].toLowerCase()
       let b = action.payload[action.payload.length - 1].toLowerCase()
         if (
           state.identicText[state.pointer] === "."
           && a === b
-        ) {
+        ) {          
           state.identicText = replaceAt(state.identicText, state.pointer, state.loadedText[state.pointer])
         }
+    },
+    finish: (state, action: PayloadAction<boolean>) => {
+      state.isFinish = action.payload
+      state.autotext = false
+      if (action.payload === false) {
+        state.loadedText = ''
+        state.userText = ''
+        state.identicText = ''
+      }
     }
   }
 })
 
-export const { changeLoadedText, changeUserText, changeAutoText } = counterSlice.actions
+export const { changeLoadedText, changeUserText, changeAutoText, finish } = counterSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 //export const changeText = (state: RootState) => state.Text.loadedText

@@ -4,6 +4,8 @@ import { changeAutoText, changeUserText } from '../../store/TextSlice'
 import { useAppSelector, useAppDispatch } from '../../store/Hooks'
 
 const Laziness = () => {
+    const letters = `абвгдеёжзийклмнопрстуфхцчшщъыьэюя .,-?!":—()`
+
     const dispatch = useAppDispatch()
 
     const autotext = useAppSelector(state => state.Text.autotext)
@@ -13,8 +15,9 @@ const Laziness = () => {
     function intervalDispatch () {
         if (autotext) {
             let intID = setInterval(() => {
-                let randomValue = String.fromCharCode(Math.floor(Math.random()*(1040-1071))+1071).toLocaleLowerCase()
-                dispatch(changeUserText(randomValue))
+                let randomIndex = Math.floor( Math.random() * letters.length )
+                let randomLetter = letters[randomIndex]             
+                dispatch(changeUserText(randomLetter))
             }, 20)     
             intervalID.current = intID
         } else {
