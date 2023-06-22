@@ -7,7 +7,7 @@ const Counter = () => {
 
     return (
             <div className={style.counter}>
-                <h1>{counterValue}</h1>
+                <h1>{counterValue+1}</h1>
             </div>
     )
 }
