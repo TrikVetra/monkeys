@@ -48,7 +48,7 @@ const WatchingArea = () => {
                 body = {
                     <>
                     <div>Обезьяны написали!</div>
-                    <div>Понадобилось <span className={styles.pointer}>{counter}</span> обезьян.</div>
+                    <div>Понадобилось <span className={styles.pointer}>{counter+1}</span> обезьян.</div>
                     </>
                 }
                 button="Начать заново" 
