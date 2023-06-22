@@ -12,7 +12,6 @@ import Counter from './components/Counter/Counter';
 import Laziness from './components/Laziness/Laziness';
 
 function App() {
-  //const [count, setCount] = useState(0)
 
   return (
     <div >
@@ -20,17 +19,14 @@ function App() {
       <Intro/>      
       <LoadText/>
       <Laziness/>
-      <h2>Опубликовать проект на Pages</h2>
       <Row>
         <Col>          
           <WritingArea/>
         </Col>
         <Col>          
           <WatchingArea/>
-        </Col>
-        
-      </Row>
-      
+        </Col>        
+      </Row>      
     </div>
   )
 }
