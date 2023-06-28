@@ -2,7 +2,7 @@
   "name": "monkeys",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://trikvetra.github.io/monkeys",
+  "homepage": "https://trikvetra.github.io/monkeys/",
   "type": "module",
   "scripts": {
     "dev": "vite",
