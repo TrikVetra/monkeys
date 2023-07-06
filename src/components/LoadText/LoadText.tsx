@@ -9,7 +9,7 @@ import CustomAlert from '../../utils/CustomAlert/CustomAlert';
 
 const LoadText = () => {
 
-    const [show, setShow] = useState(false);    
+    const [show, setShow] = useState(false);
     const handleShow = () => setShow(!show);
 
     const text = useAppSelector(state => state.Text.loadedText)
@@ -29,14 +29,20 @@ const LoadText = () => {
                 ? <CustomAlert
                     title="Загрузить текст"
                     body={
-                        <Form.Control
-                            as="textarea"
-                            aria-label="Text"
-                            value={text}
-                            onChange={(e) => dispatch(changeLoadedText(e.target.value))}
-                        />}
-                    button="Готово" 
-                    onClose={handleShow}/>
+                        <div>
+                            <p>
+                                Можешь загрузить и «войну и мир», конечно, но для начала давай что поменьше?
+                            </p>
+                            <Form.Control
+                                as="textarea"
+                                aria-label="Text"
+                                value={text}
+                                onChange={(e) => dispatch(changeLoadedText(e.target.value))}
+                            />
+                        </div>
+                    }
+                    button="Готово"
+                    onClose={handleShow} />
                 : null}
         </>
     )
