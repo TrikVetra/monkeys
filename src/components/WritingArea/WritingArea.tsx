@@ -15,11 +15,14 @@ const WritingArea = () => {
     const userText = useAppSelector(state => state.Text.userText)
     const loadedText = useAppSelector(state => state.Text.loadedText)
 
-    function handleChange(value: string) {
+    function handleChange(e: any) {
         if (loadedText === '') {
             setShow(!show)
         } else {
-            dispatch(changeUserText(value))
+            console.log(e)
+            if(e.nativeEvent.data != null) {
+                dispatch(changeUserText(e.target.value))
+            }            
         }
     }
 
@@ -31,7 +34,7 @@ const WritingArea = () => {
                 as="textarea"
                 aria-label="With textarea"
                 value={userText}
-                onChange={(e) => handleChange(e.target.value)}
+                onChange={(e) => handleChange(e)}
             />
 
             {show
